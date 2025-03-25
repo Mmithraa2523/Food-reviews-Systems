@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Restaurants</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* Custom Font */
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 40px;
+            color: #2d3e50;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Search Bar */
+        #search-bar {
+            width: 50%;
+            padding: 14px 24px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease-in-out;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #search-bar:focus {
+            border-color: #3498db;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Restaurant Cards Layout */
+        #results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Two columns */
+            gap: 30px;
+            margin-top: 30px;
+            justify-items: center;
+        }
+
+        /* Individual Restaurant Card */
+        .restaurant {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            overflow: hidden;
+            transform: scale(1);
+            background: linear-gradient(135deg, #ffffff 60%, #f7f7f7 100%);
+        }
+
+        .restaurant-link {
+            text-decoration: none;
+            /* Removes the blue underline */
+            color: inherit;
+            /* Ensure text color is the same as surrounding text */
+        }
+
+
+        .restaurant:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .restaurant::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background-color: #3498db;
+            border-radius: 10px 10px 0 0;
+        }
+
+
+        /* Restaurant Title */
+        .restaurant h3 {
+            font-size: 30px;
+            color: #2d3e50;
+            margin: 0;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Restaurant Details */
+        .restaurant p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        /* Highlight the famous dish */
+        .restaurant p strong {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Rating Stars */
+        .restaurant .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .restaurant .rating span {
+            color: #f39c12;
+            font-size: 22px;
+            margin-right: 5px;
+        }
+
+        /* Reviews Section */
+        .restaurant .review {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Hover Effect on Restaurant Card */
+        .restaurant:hover h3 {
+            color: maroon;
+        }
+
+        .restaurant:hover p {
+            color: #333;
+        }
+
+        /* Add a button for "View More" or "Visit Website" */
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Image Integration (For Restaurant Images) */
+        .restaurant img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+
+            /* Adjusting Search Bar */
+            #search-bar {
+                width: 75%;
+            }
+
+            /* Stack restaurant cards in single column for smaller screens */
+            #results {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            /* Adjust Button for Small Screens */
+            .button {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Chennai Restaurants</h1>
+        <input type="text" id="search-bar" placeholder="Search restaurants..." oninput="filterRestaurants()">
+
+        <div id="results"></div>
+    </div>
+
+
+
+    <script>
+        const restaurants = [
+            { name: "The Spicy Grill", location: "T. Nagar", famousDish: "Chicken Tikka", rating: 4.6, review: "Great ambiance and flavorful dishes." },
+            { name: "Madras Curry House", location: "Mylapore", famousDish: "Chettinad Chicken Curry", rating: 4.7, review: "Authentic South Indian flavors." },
+            { name: "The Southern Spice", location: "Egmore", famousDish: "Biryani", rating: 4.5, review: "Spicy biryani with a rich taste." },
+            { name: "Sangeetha", location: "Anna Nagar", famousDish: "Dosa", rating: 4.4, review: "A must-try for South Indian breakfast." },
+            { name: "The Kitchen", location: "Nungambakkam", famousDish: "Fish Fry", rating: 4.6, review: "Fresh seafood and excellent service." },
+            { name: "Saravana Bhavan", location: "T. Nagar", famousDish: "Masala Dosa", rating: 4.7, review: "Consistently good vegetarian food." },
+            { name: "Bombay Brasserie", location: "Alwarpet", famousDish: "Pav Bhaji", rating: 4.5, review: "Perfect blend of flavors." },
+            { name: "Salt", location: "Gopalapuram", famousDish: "Tandoori Chicken", rating: 4.8, review: "Grilled to perfection with great spices." },
+            { name: "Anjappar Chettinad Restaurant", location: "Chetpet", famousDish: "Mutton Biryani", rating: 4.6, review: "Hearty and flavorful Chettinad biryani." },
+            { name: "Rasa", location: "Mylapore", famousDish: "Vegetable Kurma", rating: 4.3, review: "Authentic South Indian vegetarian dishes." },
+            { name: "Kebab Factory", location: "Nungambakkam", famousDish: "Mutton Kebab", rating: 4.5, review: "Delicious kebabs and great sides." },
+            { name: "Pind Punjabi", location: "Adyar", famousDish: "Butter Chicken", rating: 4.7, review: "Delicious North Indian delicacies." },
+            { name: "Biryani King", location: "Mount Road", famousDish: "Hyderabadi Biryani", rating: 4.6, review: "The best biryani in the city." },
+            { name: "The Taj Coromandel", location: "Nungambakkam", famousDish: "Tandoori Platter", rating: 4.8, review: "Exquisite fine dining experience." },
+            { name: "Junior Kuppanna", location: "Alwarthirunagar", famousDish: "Mutton Biryani", rating: 4.6, review: "Spicy and delicious biryani." },
+            { name: "Tryst", location: "MRC Nagar", famousDish: "Lamb Chops", rating: 4.7, review: "Great ambiance with tasty dishes." },
+            { name: "Sukhraaj", location: "Nungambakkam", famousDish: "Tandoori Paneer", rating: 4.5, review: "Delicious vegetarian food." },
+            { name: "The Marina", location: "Elliot's Beach", famousDish: "Fish Curry", rating: 4.3, review: "Perfect place to enjoy seafood by the beach." },
+            { name: "Chettinad Plaza", location: "Velachery", famousDish: "Chettinad Fish Curry", rating: 4.5, review: "Traditional flavors with a modern twist." },
+            { name: "Mosaic", location: "Mylapore", famousDish: "Prawn Curry", rating: 4.6, review: "Amazing variety and quality food." },
+            { name: "Barbeque Nation", location: "Velachery", famousDish: "Barbeque Platter", rating: 4.4, review: "Good buffet with plenty of options." },
+            { name: "The Courtyard", location: "Nungambakkam", famousDish: "Lasagna", rating: 4.7, review: "Great for international cuisine." },
+            { name: "Murugan Idli Shop", location: "T. Nagar", famousDish: "Idli", rating: 4.8, review: "Best idlis in the city." },
+            { name: "Olive Beach", location: "Alwarpet", famousDish: "Grilled Fish", rating: 4.6, review: "Fine dining with a relaxed vibe." },
+            { name: "The Royal India", location: "Mount Road", famousDish: "Rogan Josh", rating: 4.5, review: "Royal treatment with flavorful dishes." },
+            { name: "SS hyderbad", location: "Adyar", famousDish: "Pizzas", rating: 4.4, review: "Perfect for pizza lovers." },
+            { name: "Bay View", location: "Marina Beach", famousDish: "Grilled Lobster", rating: 4.7, review: "Enjoy seafood with a beautiful view." },
+            { name: "The French Loaf", location: "OMR", famousDish: "French Toast", rating: 4.5, review: "Great bakery and breakfast options." },
+            { name: "The Green Bean", location: "Taramani", famousDish: "Vegan Burger", rating: 4.6, review: "Great vegan options in town." },
+            { name: "Chennai Spices", location: "Kotturpuram", famousDish: "Masala Dosa", rating: 4.3, review: "Good South Indian vegetarian food." },
+            { name: "Chennai Darbar", location: "T. Nagar", famousDish: "Hyderabadi Biryani", rating: 4.5, review: "Delicious biryani with authentic flavors." },
+            { name: "Shree Rajbhog", location: "Velachery", famousDish: "Dhokla", rating: 4.4, review: "Indian sweets and snacks at their best." },
+            { name: "Marina Bay", location: "Elliot's Beach", famousDish: "Prawns Masala", rating: 4.6, review: "Delicious seafood with a scenic view." },
+            { name: "Al Huda", location: "Nungambakkam", famousDish: "Shawarma", rating: 4.5, review: "Best shawarma in Chennai." },
+            { name: "The Royal Chettinad", location: "Chetpet", famousDish: "Chettinad Chicken Curry", rating: 4.7, review: "Hearty, spicy meals with great flavors." },
+            { name: "Sultan Kitchen", location: "Adyar", famousDish: "Tandoori Chicken", rating: 4.5, review: "Amazing tandoor dishes and good service." }
+        ];
+        function filterRestaurants() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const filteredRestaurants = restaurants.filter(restaurant => {
+                return restaurant.name.toLowerCase().includes(searchQuery) ||
+                    restaurant.location.toLowerCase().includes(searchQuery) ||
+                    restaurant.famousDish.toLowerCase().includes(searchQuery);
+            });
+
+            displayRestaurants(filteredRestaurants);
+        }
+
+        function displayRestaurants(filteredRestaurants) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            filteredRestaurants.forEach(restaurant => {
+                const restaurantDiv = document.createElement('div');
+                restaurantDiv.classList.add('restaurant');
+
+                // Wrap the entire card in an anchor tag to make it clickable
+                const restaurantLink = document.createElement('a');
+                restaurantLink.href = `review?name=${encodeURIComponent(restaurant.name)}`;  // Passing the restaurant name to the review page
+                restaurantLink.classList.add('restaurant-link'); // Adding a class for styling (optional)
+
+                restaurantLink.innerHTML = `
+            <h3>${restaurant.name}</h3>
+            <p><strong>Location:📍</strong> ${restaurant.location}</p>
+            <p><strong>Famous Dish:🍜</strong> ${restaurant.famousDish}</p>
+            <p><strong>Rating:⭐</strong> ${restaurant.rating}</p>
+            <p><strong>Review:✍️ </strong> ${restaurant.review}</p>
+        `;
+
+                restaurantDiv.appendChild(restaurantLink);
+                resultsDiv.appendChild(restaurantDiv);
+            });
+        }
+
+
+
+        // Display all restaurants on initial load
+        displayRestaurants(restaurants);
+
+
+
+    </script>
+</body>
+
+</html>

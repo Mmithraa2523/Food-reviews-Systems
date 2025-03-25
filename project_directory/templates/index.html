@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamil Nadu's Finest Cuisines</title>
+  
+  <style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .hero-section {
+    background: url('/static/images/butter-paneer.jpg') center/cover no-repeat;
+    
+    color: white;
+    text-align: center;
+    padding: 150px 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .get-started-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #d32f2f;
+    
+    color: white;
+    border: none;
+    border-radius: 85px;
+    cursor: pointer;
+  }
+  
+  .get-started-btn:hover {
+    background-color: #b71c1c;
+  }
+  
+  .featured-delicacies {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f4f0;
+  }
+  
+  .featured-delicacies h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .delicacies-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .delicacy-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: left;
+  }
+  
+  .delicacy-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .delicacy-card p {
+    padding: 10px;
+    font-size: 1rem;
+  }
+  </style>
+  
+
+  
+</head>
+<body>
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>Discover Tamil Nadu's Finest Cuisines</h1>
+      <p>Explore and review the best restaurants across Tamil Nadu</p>
+      <button class="get-started-btn" onclick="window.location.href='/login'">Get Started</button>
+    </div>
+  </header>
+
+  <section class="featured-delicacies">
+    <h2>Featured Delicacies</h2>
+    <div class="delicacies-grid">
+      <div class="delicacy-card">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}" alt="Tamil Nadu Feast">
+        <p>A grand Tamil Nadu feast served on banana leaf featuring various traditional dishes</p>
+      </div>
+      <div class="delicacy-card">
+        <img src="{{ url_for('static', filename='images/image2.jpg') }}" alt="Chettinad Curry">
+        <p>Spicy Chettinad chicken curry with flaky parotta</p>
+      </div>
+      <div class="delicacy-card">
+        <img src="{{ url_for('static', filename='images/image3.jpg') }}" alt="Dosa">
+        <p>Crispy Madurai-style ghee roast dosa with chutneys</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

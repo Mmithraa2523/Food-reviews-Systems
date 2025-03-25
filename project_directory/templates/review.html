@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Reviews</title>
+
+    <!-- Link to Google Fonts for a professional, clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 36px;
+            margin-top: 40px;
+        }
+
+        #reviews {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 20px;
+        }
+
+        .review {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 15px;
+            width: 80%;
+            max-width: 800px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .review:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .review p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .review p strong {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .review .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .review .email {
+            color: #2980b9;
+        }
+
+        .review .date {
+            color: #7f8c8d;
+        }
+
+        .review .review-text {
+            font-style: italic;
+            color: #2c3e50;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            #reviews {
+                margin: 20px 10px;
+            }
+
+            .review {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="restaurant-name"></h1>
+    <div id="reviews"></div>
+    
+    
+
+    <script>
+        const reviews = {
+            "The Spicy Grill": [
+                { reviewer: "John Doe", email: "john@example.com", date: "2025-01-10", rating: "4.5", review: "Great ambiance and flavorful dishes." },
+                { reviewer: "Jane Smith", email: "jane@example.com", date: "2025-01-12", rating: "5", review: "The chicken was perfectly cooked, would definitely visit again!" },
+                { reviewer: "Bob Lee", email: "bob@example.com", date: "2025-01-15", rating: "4", review: "Service was a bit slow, but the food made up for it." },
+                { reviewer: "Alice Brown", email: "alice@example.com", date: "2025-01-18", rating: "3.5", review: "Loved the spicy kick to the chicken tikka!" },
+                { reviewer: "Chris Wilson", email: "chris@example.com", date: "2025-01-20", rating: "4", review: "One of the best dining experiences I've had." }
+            ],
+
+            "Madras Curry House":[
+                { reviewer: "Priya Rajan", email: "priya@example.com", date: "2025-01-05", rating: "4.5", review: "Authentic South Indian flavors, loved it!" },
+                { reviewer: "Vikram Singh", email: "vikram@example.com", date: "2025-01-07", rating: "4.9", review: "Spicy and aromatic curry, but a bit oily." },
+                { reviewer: "Meera Patel", email: "meera@example.com", date: "2025-01-09", rating: "5", review: "A great place to experience traditional Chettinad food." },
+                { reviewer: "Arjun Menon", email: "arjun@example.com", date: "2025-01-11", rating: "3.9", review: "The curry was a little too spicy for my taste, but amazing otherwise." },
+                { reviewer: "Divya Sharma", email: "divya@example.com", date: "2025-01-13", rating: "5", review: "Service was friendly and quick, food was delicious." }
+            ],
+
+
+            "The Southern Spice": [
+                { reviewer: "Karan Das", email: "karan@example.com", date: "2025-01-03", rating: "4", review: "Spicy biryani with a rich taste." },
+                { reviewer: "Sana Malik", email: "sana@example.com", date: "2025-01-06", rating: "5", review: "Great flavor, but the spice level was too high for me." },
+                { reviewer: "Rahul Nair", email: "rahul@example.com", date: "2025-01-08", rating: "3.5", review: "Loved the taste, but could have used more meat." },
+                { reviewer: "Anita Kapoor", email: "anita@example.com", date: "2025-01-10", rating: "5", review: "Great place for biryani lovers." },
+                { reviewer: "Neha Gupta", email: "neha@example.com", date: "2025-01-12", rating: "5", review: "A little crowded but worth the wait for the biryani." }
+            ],
+
+            "Sangeetha": [
+                {
+                    reviewer: "Rajesh Kumar", email: "rajesh.k@example.com", date: "2025-01-20", rating: "5", review: "A must-try for South Indian breakfast."
+                },
+                {
+                    reviewer: "Meera Iyer", email: "meera.i@example.com", date: "2025-01-15", rating: "5", review: "The dosa was crispy and delicious, just the way I like it."
+                },
+                {
+                    reviewer: "Arun Nair",
+                    email: "arun.nair@example.com",
+                    date: "2025-01-10",
+                    rating: "4.5",
+                    review: "Great variety of dosas, but the service could be better."
+                },
+                {
+                    reviewer: "Lakshmi Devi",
+                    email: "lakshmi.d@example.com",
+                    date: "2025-01-08",
+                    rating: "4",
+                    review: "Excellent place for a hearty breakfast."
+                },
+                {
+                    reviewer: "Suresh Reddy",
+                    email: "suresh.r@example.com",
+                    date: "2025-01-05",
+                    rating: "4.6",
+                    review: "Tried their filter coffee too—great addition to the meal."
+                }
+            ],
+
+            "The Kitchen": [
+                {
+                    reviewer: "Arjun Verma",
+                    email: "arjun.v@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Fresh seafood and excellent service."
+                },
+                {
+                    reviewer: "Priya Menon",
+                    email: "priya.m@example.com",
+                    date: "2025-01-16",
+                    rating: "3.5",
+                    review: "The fish fry was crispy and flavorful."
+                },
+                {
+                    reviewer: "Vikram R",
+                    email: "vikram.r@example.com",
+                    date: "2025-01-12",
+                    rating: "4.5",
+                    review: "A little on the pricier side, but worth it for the quality."
+                },
+                {
+                    reviewer: "Swati Sharma",
+                    email: "swati.s@example.com",
+                    date: "2025-01-09",
+                    rating: "4.9",
+                    review: "Great ambiance, perfect for a casual dinner."
+                },
+                {
+                    reviewer: "Deepak Jain",
+                    email: "deepak.j@example.com",
+                    date: "2025-01-07",
+                    rating: "4.5",
+                    review: "Loved the variety of fish options available."
+                }
+            ],
+            "Saravana Bhavan": [
+                {
+                    reviewer: "Anitha Rao",
+                    email: "anitha.r@example.com",
+                    date: "2025-01-18",
+                    rating: "4",
+                    review: "Consistently good vegetarian food."
+                },
+                {
+                    reviewer: "Karthik V",
+                    email: "karthik.v@example.com",
+                    date: "2025-01-14",
+                    rating: "5",
+                    review: "The masala dosa is absolutely delicious."
+                },
+                {
+                    reviewer: "Ravi Menon",
+                    email: "ravi.m@example.com",
+                    date: "2025-01-11",
+                    rating: "4.9",
+                    review: "A bit crowded, but the food makes up for it."
+                },
+                {
+                    reviewer: "Deepa Nair",
+                    email: "deepa.n@example.com",
+                    date: "2025-01-08",
+                    rating: "5",
+                    review: "Quick service, amazing taste."
+                },
+                {
+                    reviewer: "Sanjay Gupta",
+                    email: "sanjay.g@example.com",
+                    date: "2025-01-04",
+                    rating: "4.3",
+                    review: "Perfect place for authentic South Indian food."
+                }
+            ],
+            "Bombay Brasserie": [
+                {
+                    reviewer: "Vikrant Patel",
+                    email: "vikrant.p@example.com",
+                    date: "2025-01-20",
+                    rating: "4.4",
+                    review: "Perfect blend of flavors."
+                },
+                {
+                    reviewer: "Anjali Sharma",
+                    email: "anjali.s@example.com",
+                    date: "2025-01-17",
+                    rating: "4.8",
+                    review: "The pav bhaji was flavorful but could have been spicier."
+                },
+                {
+                    reviewer: "Prakash Iyer",
+                    email: "prakash.i@example.com",
+                    date: "2025-01-13",
+                    rating: "5",
+                    review: "Great ambiance and good service."
+                },
+                {
+                    reviewer: "Sneha Desai",
+                    email: "sneha.d@example.com",
+                    date: "2025-01-10",
+                    rating: "5",
+                    review: "A fantastic place for a quick snack."
+                },
+                {
+                    reviewer: "Kavitha Rao",
+                    email: "kavitha.r@example.com",
+                    date: "2025-01-06",
+                    rating: "3.9",
+                    review: "Loved the street food vibes in a fine dining setting."
+                }
+            ],
+            "Salt": [
+                {
+                    reviewer: "Amit Singh",
+                    email: "amit.s@example.com",
+                    date: "2025-01-21",
+                    rating: "4.2",
+                    review: "Grilled to perfection with great spices."
+                },
+                {
+                    reviewer: "Priya N",
+                    email: "priya.n@example.com",
+                    date: "2025-01-18",
+                    rating: "4",
+                    review: "One of the best tandoori chickens I've had."
+                },
+                {
+                    reviewer: "Rahul Sharma",
+                    email: "rahul.s@example.com",
+                    date: "2025-01-15",
+                    rating: "5",
+                    review: "The flavors were intense and perfectly balanced."
+                },
+                {
+                    reviewer: "Divya Menon",
+                    email: "divya.m@example.com",
+                    date: "2025-01-12",
+                    rating: "5",
+                    review: "Nice ambiance and great service."
+                },
+                {
+                    reviewer: "Sameer Gupta",
+                    email: "sameer.g@example.com",
+                    date: "2025-01-09",
+                    rating: "4.6",
+                    review: "A must-visit for tandoori lovers."
+                }
+            ],
+
+            "Anjappar Chettinad Restaurant": [
+                {
+                    reviewer: "Naveen R",
+                    email: "naveen.r@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Hearty and flavorful Chettinad biryani."
+                },
+                {
+                    reviewer: "Pooja K",
+                    email: "pooja.k@example.com",
+                    date: "2025-01-16",
+                    rating: "4.5",
+                    review: "The mutton was tender and flavorful."
+                },
+                {
+                    reviewer: "Sanjana Desai",
+                    email: "sanjana.d@example.com",
+                    date: "2025-01-13",
+                    rating: "4.7",
+                    review: "Could use a bit more spice, but still tasty."
+                },
+                {
+                    reviewer: "Manoj Verma",
+                    email: "manoj.v@example.com",
+                    date: "2025-01-10",
+                    rating: "4.2",
+                    review: "Perfectly spiced and filling."
+                },
+                {
+                    reviewer: "Neha Joshi",
+                    email: "neha.j@example.com",
+                    date: "2025-01-07",
+                    rating: "4.1",
+                    review: "Great place for a Chettinad meal."
+                }
+            ],
+            "Rasa": [
+                {
+                    reviewer: "Anjali Menon",
+                    email: "anjali.m@example.com",
+                    date: "2025-01-20",
+                    rating: "4",
+                    review: "Authentic South Indian vegetarian dishes."
+                },
+                {
+                    reviewer: "Rahul Nair",
+                    email: "rahul.n@example.com",
+                    date: "2025-01-18",
+                    rating: "4.3",
+                    review: "The vegetable kurma was flavorful, though a bit bland for my taste."
+                },
+                {
+                    reviewer: "Sita Rao",
+                    email: "sita.r@example.com",
+                    date: "2025-01-15",
+                    rating: "4",
+                    review: "Nice place for a vegetarian meal."
+                },
+                {
+                    reviewer: "Karthik Reddy",
+                    email: "karthik.r@example.com",
+                    date: "2025-01-12",
+                    rating: "3",
+                    review: "Service could be faster, but the food was good."
+                },
+                {
+                    reviewer: "Meera Iyer",
+                    email: "meera.i@example.com",
+                    date: "2025-01-10",
+                    rating: "3.5",
+                    review: "A bit overpriced for the portion size."
+                }
+            ],
+            "Kebab Factory": [
+                {
+                    reviewer: "Arun Sharma",
+                    email: "arun.s@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Delicious kebabs and great sides."
+                },
+                {
+                    reviewer: "Pooja Desai",
+                    email: "pooja.d@example.com",
+                    date: "2025-01-17",
+                    rating: "4.6",
+                    review: "The mutton kebabs were tender and juicy."
+                },
+                {
+                    reviewer: "Sanjay Gupta",
+                    email: "sanjay.g@example.com",
+                    date: "2025-01-14",
+                    rating: "4.8",
+                    review: "Perfect for a group dinner with lots of variety."
+                },
+                {
+                    reviewer: "Ravi Verma",
+                    email: "ravi.v@example.com",
+                    date: "2025-01-11",
+                    rating: "4.4",
+                    review: "Great place for non-vegetarian food lovers."
+                },
+                {
+                    reviewer: "Neha Joshi",
+                    email: "neha.j@example.com",
+                    date: "2025-01-08",
+                    rating: "4",
+                    review: "Good portion sizes and excellent taste."
+                }
+            ],
+            "Pind Punjabi": [
+                {
+                    reviewer: "Anitha Rao",
+                    email: "anitha.r@example.com",
+                    date: "2025-01-20",
+                    rating: "4",
+                    review: "Delicious North Indian delicacies."
+                },
+                {
+                    reviewer: "Kunal Singh",
+                    email: "kunal.s@example.com",
+                    date: "2025-01-18",
+                    rating: "4.5",
+                    review: "The butter chicken was rich and creamy, just perfect."
+                },
+                {
+                    reviewer: "Sneha Patel",
+                    email: "sneha.p@example.com",
+                    date: "2025-01-15",
+                    rating: "4.9",
+                    review: "Great ambiance and friendly staff."
+                },
+                {
+                    reviewer: "Vikram Nair",
+                    email: "vikram.n@example.com",
+                    date: "2025-01-13",
+                    rating: "4.3",
+                    review: "The naan and butter chicken combo was amazing."
+                },
+                {
+                    reviewer: "Priya Kumar",
+                    email: "priya.k@example.com",
+                    date: "2025-01-11",
+                    rating: "5",
+                    review: "A bit expensive but worth every bite."
+                }
+            ],
+
+            "Biryani King": [
+                {
+                    reviewer: "Naveen Iyer",
+                    email: "naveen.i@example.com",
+                    date: "2025-01-19",
+                    rating: "4.2",
+                    review: "The best biryani in the city."
+                },
+                {
+                    reviewer: "Aruna Devi",
+                    email: "aruna.d@example.com",
+                    date: "2025-01-17",
+                    rating: "3",
+                    review: "The biryani was aromatic and flavorful."
+                },
+                {
+                    reviewer: "Rohit Verma",
+                    email: "rohit.v@example.com",
+                    date: "2025-01-14",
+                    rating: "4",
+                    review: "Great place for a hearty meal."
+                },
+                {
+                    reviewer: "Deepak Jain",
+                    email: "deepak.j@example.com",
+                    date: "2025-01-12",
+                    rating: "4.3",
+                    review: "Could use a little more meat in the biryani."
+                },
+                {
+                    reviewer: "Sangeetha K",
+                    email: "sangeetha.k@example.com",
+                    date: "2025-01-09",
+                    rating: "3.4",
+                    review: "Consistently good food and service."
+                }
+            ],
+
+            "The Taj Coromandel": [
+                {
+                    reviewer: "Vivek Malhotra",
+                    email: "vivek.m@example.com",
+                    date: "2025-01-21",
+                    rating: "4.5",
+                    review: "Exquisite fine dining experience."
+                },
+                {
+                    reviewer: "Priya Menon",
+                    email: "priya.m@example.com",
+                    date: "2025-01-19",
+                    rating: "5",
+                    review: "The tandoori platter was perfect for sharing."
+                },
+                {
+                    reviewer: "Rahul N",
+                    email: "rahul.n@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Impeccable service and delicious food."
+                },
+                {
+                    reviewer: "Sneha Joshi",
+                    email: "sneha.j@example.com",
+                    date: "2025-01-14",
+                    rating: "3.9",
+                    review: "Great for special occasions."
+                },
+                {
+                    reviewer: "Anjali Gupta",
+                    email: "anjali.g@example.com",
+                    date: "2025-01-10",
+                    rating: "4.9",
+                    review: "A luxurious dining experience with fantastic flavors."
+                }
+            ],
+            "Murugan Idli Shop": [
+                {
+                    reviewer: "Ananya Rao",
+                    email: "ananya.r@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Best idlis in the city."
+                },
+                {
+                    reviewer: "Rajesh Kumar",
+                    email: "rajesh.k@example.com",
+                    date: "2025-01-20",
+                    rating: "4.9",
+                    review: "The idlis were soft and fluffy, amazing!"
+                },
+                {
+                    reviewer: "Madhuri Iyer",
+                    email: "madhuri.i@example.com",
+                    date: "2025-01-18",
+                    rating: "4.3",
+                    review: "Great place for a traditional South Indian breakfast."
+                },
+                {
+                    reviewer: "Gopal Verma",
+                    email: "gopal.v@example.com",
+                    date: "2025-01-15",
+                    rating: "4.9",
+                    review: "Quick service and delicious food."
+                },
+                {
+                    reviewer: "Priyanka Nair",
+                    email: "priyanka.n@example.com",
+                    date: "2025-01-12",
+                    rating: "4",
+                    review: "The chutneys were the highlight of the meal."
+                }
+            ],
+            "Olive Beach": [
+                {
+                    reviewer: "Rohit Desai",
+                    email: "rohit.d@example.com",
+                    date: "2025-01-23",
+                    rating: "4",
+                    review: "Fine dining with a relaxed vibe."
+                },
+                {
+                    reviewer: "Sunita Gupta",
+                    email: "sunita.g@example.com",
+                    date: "2025-01-21",
+                    rating: "4.3",
+                    review: "The grilled fish was fresh and perfectly cooked."
+                },
+                {
+                    reviewer: "Vikram Singh",
+                    email: "vikram.s@example.com",
+                    date: "2025-01-19",
+                    rating: "5",
+                    review: "Great atmosphere, perfect for a romantic dinner."
+                },
+                {
+                    reviewer: "Sanya Malhotra",
+                    email: "sanya.m@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "A bit expensive but worth it for the quality."
+                },
+                {
+                    reviewer: "Arjun Nair",
+                    email: "arjun.n@example.com",
+                    date: "2025-01-14",
+                    rating: "5",
+                    review: "Loved the seafood options."
+                }
+            ],
+            "The Royal India": [
+                {
+                    reviewer: "Karan Sharma",
+                    email: "karan.s@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Royal treatment with flavorful dishes."
+                },
+                {
+                    reviewer: "Neha Jain",
+                    email: "neha.j@example.com",
+                    date: "2025-01-20",
+                    rating: "4.6",
+                    review: "The rogan josh was rich and tender."
+                },
+                {
+                    reviewer: "Amit Mehra",
+                    email: "amit.m@example.com",
+                    date: "2025-01-18",
+                    rating: "4.9",
+                    review: "The ambiance was regal and relaxing."
+                },
+                {
+                    reviewer: "Divya Reddy",
+                    email: "divya.r@example.com",
+                    date: "2025-01-15",
+                    rating: "4.8",
+                    review: "Great place for a special dinner."
+                },
+                {
+                    reviewer: "Suraj Patil",
+                    email: "suraj.p@example.com",
+                    date: "2025-01-12",
+                    rating: "4",
+                    review: "Service was exceptional and attentive."
+                }
+            ],
+            "SS hyderbad": [
+                {
+                    reviewer: "Anil Reddy",
+                    email: "anil.r@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Perfect for pizza lovers."
+                },
+                {
+                    reviewer: "Shweta Verma",
+                    email: "shweta.v@example.com",
+                    date: "2025-01-20",
+                    rating: "4.9",
+                    review: "The pizzas were delicious and crispy."
+                },
+                {
+                    reviewer: "Karthik Rao",
+                    email: "karthik.r@example.com",
+                    date: "2025-01-18",
+                    rating: "4.7",
+                    review: "A great place for a casual dinner."
+                },
+                {
+                    reviewer: "Richa Sharma",
+                    email: "richa.s@example.com",
+                    date: "2025-01-16",
+                    rating: "4",
+                    review: "A bit small, but cozy and friendly."
+                },
+                {
+                    reviewer: "Sanjana Mehta",
+                    email: "sanjana.m@example.com",
+                    date: "2025-01-13",
+                    rating: "5",
+                    review: "The garlic bread was a perfect side."
+                }
+            ],
+            "Bay View": [
+                {
+                    reviewer: "Arvind Nair",
+                    email: "arvind.n@example.com",
+                    date: "2025-01-23",
+                    rating: "4",
+                    review: "Enjoy seafood with a beautiful view."
+                },
+                {
+                    reviewer: "Pooja Kumar",
+                    email: "pooja.k@example.com",
+                    date: "2025-01-21",
+                    rating: "4.6",
+                    review: "The grilled lobster was incredible."
+                },
+                {
+                    reviewer: "Deepa Iyer",
+                    email: "deepa.i@example.com",
+                    date: "2025-01-19",
+                    rating: "4.9",
+                    review: "Perfect for a sunset dinner by the beach."
+                },
+                {
+                    reviewer: "Manoj Singh",
+                    email: "manoj.s@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Amazing seafood and lovely atmosphere."
+                },
+                {
+                    reviewer: "Ritika Desai",
+                    email: "ritika.d@example.com",
+                    date: "2025-01-14",
+                    rating: "5",
+                    review: "Great service and fantastic location."
+                }
+            ],
+            "The French Loaf": [
+                {
+                    reviewer: "Shivani Patel",
+                    email: "shivani.p@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Great bakery and breakfast options."
+                },
+                {
+                    reviewer: "Rajiv Malhotra",
+                    email: "rajiv.m@example.com",
+                    date: "2025-01-20",
+                    rating: "4.9",
+                    review: "The french toast was soft and delicious."
+                },
+                {
+                    reviewer: "Sneha Verma",
+                    email: "sneha.v@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "Perfect place for a light breakfast."
+                },
+                {
+                    reviewer: "Vikash Rao",
+                    email: "vikash.r@example.com",
+                    date: "2025-01-16",
+                    rating: "3",
+                    review: "Could improve the coffee, but overall a great experience."
+                },
+                {
+                    reviewer: "Maya Iyer",
+                    email: "maya.i@example.com",
+                    date: "2025-01-14",
+                    rating: "4.9",
+                    review: "Loved the ambiance, very cozy and relaxing."
+                }
+            ],
+
+            "The Green Bean": [
+                {
+                    reviewer: "Alice",
+                    email: "alice@example.com",
+                    date: "2025-01-20",
+                    rating: "5",
+                    review: "Great vegan options in town."
+                },
+                {
+                    reviewer: "John",
+                    email: "john@example.com",
+                    date: "2025-01-21",
+                    rating: "4",
+                    review: "The vegan burger was tasty and filling."
+                },
+                {
+                    reviewer: "Mia",
+                    email: "mia@example.com",
+                    date: "2025-01-22",
+                    rating: "5",
+                    review: "Nice ambiance and good service."
+                },
+                {
+                    reviewer: "Sophia",
+                    email: "sophia@example.com",
+                    date: "2025-01-23",
+                    rating: "5",
+                    review: "Loved the variety of vegan dishes."
+                },
+                {
+                    reviewer: "James",
+                    email: "james@example.com",
+                    date: "2025-01-24",
+                    rating: "4",
+                    review: "Great place for a healthy meal."
+                }
+            ],
+            "Chennai Spices": [
+                {
+                    reviewer: "Ravi",
+                    email: "ravi@example.com",
+                    date: "2025-01-18",
+                    rating: "4",
+                    review: "Good South Indian vegetarian food."
+                },
+                {
+                    reviewer: "Priya",
+                    email: "priya@example.com",
+                    date: "2025-01-19",
+                    rating: "3",
+                    review: "The masala dosa was crispy but lacked spice."
+                },
+                {
+                    reviewer: "Nisha",
+                    email: "nisha@example.com",
+                    date: "2025-01-20",
+                    rating: "3",
+                    review: "Nice atmosphere, but the food could be improved."
+                },
+                {
+                    reviewer: "Amit",
+                    email: "amit@example.com",
+                    date: "2025-01-21",
+                    rating: "2",
+                    review: "The chutneys were great, but the dosa was a bit bland."
+                },
+                {
+                    reviewer: "Suresh",
+                    email: "suresh@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Affordable and decent vegetarian food."
+                }
+            ],
+            "Chennai Darbar": [
+                {
+                    reviewer: "Kavya",
+                    email: "kavya@example.com",
+                    date: "2025-01-15",
+                    rating: "5",
+                    review: "Delicious biryani with authentic flavors."
+                },
+                {
+                    reviewer: "Deepak",
+                    email: "deepak@example.com",
+                    date: "2025-01-16",
+                    rating: "5",
+                    review: "The biryani was aromatic and flavorful."
+                },
+                {
+                    reviewer: "Ananya",
+                    email: "ananya@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Great portion size, but a bit oily."
+                },
+                {
+                    reviewer: "Raj",
+                    email: "raj@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "A classic place for Hyderabadi biryani."
+                },
+                {
+                    reviewer: "Manoj",
+                    email: "manoj@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Service was quick and attentive."
+                }
+            ],
+            "Shree Rajbhog": [
+                {
+                    reviewer: "Neha",
+                    email: "neha@example.com",
+                    date: "2025-01-10",
+                    rating: "4",
+                    review: "Indian sweets and snacks at their best."
+                },
+                {
+                    reviewer: "Vikram",
+                    email: "vikram@example.com",
+                    date: "2025-01-11",
+                    rating: "4",
+                    review: "The dhokla was soft and tasty."
+                },
+                {
+                    reviewer: "Kiran",
+                    email: "kiran@example.com",
+                    date: "2025-01-12",
+                    rating: "5",
+                    review: "A great place to try Indian snacks."
+                },
+                {
+                    reviewer: "Swati",
+                    email: "swati@example.com",
+                    date: "2025-01-13",
+                    rating: "4",
+                    review: "The service was quick and polite."
+                },
+                {
+                    reviewer: "Siddharth",
+                    email: "siddharth@example.com",
+                    date: "2025-01-14",
+                    rating: "5",
+                    review: "Affordable and great quality."
+                }
+            ],
+            "Junior Kuppanna":[
+            { reviewer: "John Doe", email: "john@example.com", date: "2025-01-10", rating: "4.5", review: "Great ambiance and flavorful dishes." },
+                { reviewer: "Jane Smith", email: "jane@example.com", date: "2025-01-12", rating: "5", review: "The chicken was perfectly cooked, would definitely visit again!" },
+                { reviewer: "Bob Lee", email: "bob@example.com", date: "2025-01-15", rating: "4", review: "Service was a bit slow, but the food made up for it." },
+                { reviewer: "Alice Brown", email: "alice@example.com", date: "2025-01-18", rating: "3.5", review: "Loved the spicy kick to the chicken tikka!" },
+                { reviewer: "Chris Wilson", email: "chris@example.com", date: "2025-01-20", rating: "4", review: "One of the best dining experiences I've had." }
+            ],
+            "Tryst":[
+            {
+                    reviewer: "Kavya",
+                    email: "kavya@example.com",
+                    date: "2025-01-15",
+                    rating: "5",
+                    review: "Delicious biryani with authentic flavors."
+                },
+                {
+                    reviewer: "Deepak",
+                    email: "deepak@example.com",
+                    date: "2025-01-16",
+                    rating: "5",
+                    review: "The biryani was aromatic and flavorful."
+                },
+                {
+                    reviewer: "Ananya",
+                    email: "ananya@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Great portion size, but a bit oily."
+                },
+                {
+                    reviewer: "Raj",
+                    email: "raj@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "A classic place for Hyderabadi biryani."
+                },
+                {
+                    reviewer: "Manoj",
+                    email: "manoj@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Service was quick and attentive."
+                }
+
+            ],
+            "Sukhraaj":[
+            {
+                    reviewer: "Vivek Malhotra",
+                    email: "vivek.m@example.com",
+                    date: "2025-01-21",
+                    rating: "4.5",
+                    review: "Exquisite fine dining experience."
+                },
+                {
+                    reviewer: "Priya Menon",
+                    email: "priya.m@example.com",
+                    date: "2025-01-19",
+                    rating: "5",
+                    review: "The tandoori platter was perfect for sharing."
+                },
+                {
+                    reviewer: "Rahul N",
+                    email: "rahul.n@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Impeccable service and delicious food."
+                },
+                {
+                    reviewer: "Sneha Joshi",
+                    email: "sneha.j@example.com",
+                    date: "2025-01-14",
+                    rating: "3.9",
+                    review: "Great for special occasions."
+                },
+                {
+                    reviewer: "Anjali Gupta",
+                    email: "anjali.g@example.com",
+                    date: "2025-01-10",
+                    rating: "4.9",
+                    review: "A luxurious dining experience with fantastic flavors."
+                }
+            ],
+            "The Marina":[
+            {
+                    reviewer: "Anil Reddy",
+                    email: "anil.r@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Perfect for pizza lovers."
+                },
+                {
+                    reviewer: "Shweta Verma",
+                    email: "shweta.v@example.com",
+                    date: "2025-01-20",
+                    rating: "4.9",
+                    review: "The pizzas were delicious and crispy."
+                },
+                {
+                    reviewer: "Karthik Rao",
+                    email: "karthik.r@example.com",
+                    date: "2025-01-18",
+                    rating: "4.7",
+                    review: "A great place for a casual dinner."
+                },
+                {
+                    reviewer: "Richa Sharma",
+                    email: "richa.s@example.com",
+                    date: "2025-01-16",
+                    rating: "4",
+                    review: "A bit small, but cozy and friendly."
+                },
+                {
+                    reviewer: "Sanjana Mehta",
+                    email: "sanjana.m@example.com",
+                    date: "2025-01-13",
+                    rating: "5",
+                    review: "The garlic bread was a perfect side."
+                }
+
+            ],
+            "Chettinad Plaza":[
+            { reviewer: "Priya Rajan", email: "priya@example.com", date: "2025-01-05", rating: "4.5", review: "Authentic South Indian flavors, loved it!" },
+                { reviewer: "Vikram Singh", email: "vikram@example.com", date: "2025-01-07", rating: "4.9", review: "Spicy and aromatic curry, but a bit oily." },
+                { reviewer: "Meera Patel", email: "meera@example.com", date: "2025-01-09", rating: "5", review: "A great place to experience traditional Chettinad food." },
+                { reviewer: "Arjun Menon", email: "arjun@example.com", date: "2025-01-11", rating: "3.9", review: "The curry was a little too spicy for my taste, but amazing otherwise." },
+                { reviewer: "Divya Sharma", email: "divya@example.com", date: "2025-01-13", rating: "5", review: "Service was friendly and quick, food was delicious." }
+            ],
+            "Mosaic":[
+            {
+                    reviewer: "Karan Sharma",
+                    email: "karan.s@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Royal treatment with flavorful dishes."
+                },
+                {
+                    reviewer: "Neha Jain",
+                    email: "neha.j@example.com",
+                    date: "2025-01-20",
+                    rating: "4.6",
+                    review: "The rogan josh was rich and tender."
+                },
+                {
+                    reviewer: "Amit Mehra",
+                    email: "amit.m@example.com",
+                    date: "2025-01-18",
+                    rating: "4.9",
+                    review: "The ambiance was regal and relaxing."
+                },
+                {
+                    reviewer: "Divya Reddy",
+                    email: "divya.r@example.com",
+                    date: "2025-01-15",
+                    rating: "4.8",
+                    review: "Great place for a special dinner."
+                },
+                {
+                    reviewer: "Suraj Patil",
+                    email: "suraj.p@example.com",
+                    date: "2025-01-12",
+                    rating: "4",
+                    review: "Service was exceptional and attentive."
+                }
+            ],
+            "Barbeque Nation":[
+            {
+                    reviewer: "Naveen R",
+                    email: "naveen.r@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Hearty and flavorful Chettinad biryani."
+                },
+                {
+                    reviewer: "Pooja K",
+                    email: "pooja.k@example.com",
+                    date: "2025-01-16",
+                    rating: "4.5",
+                    review: "The mutton was tender and flavorful."
+                },
+                {
+                    reviewer: "Sanjana Desai",
+                    email: "sanjana.d@example.com",
+                    date: "2025-01-13",
+                    rating: "4.7",
+                    review: "Could use a bit more spice, but still tasty."
+                },
+                {
+                    reviewer: "Manoj Verma",
+                    email: "manoj.v@example.com",
+                    date: "2025-01-10",
+                    rating: "4.2",
+                    review: "Perfectly spiced and filling."
+                },
+                {
+                    reviewer: "Neha Joshi",
+                    email: "neha.j@example.com",
+                    date: "2025-01-07",
+                    rating: "4.1",
+                    review: "Great place for a Chettinad meal."
+                }
+
+            ],
+            "The Courtyard":[
+            { reviewer: "Karan Das", email: "karan@example.com", date: "2025-01-03", rating: "4", review: "Spicy biryani with a rich taste." },
+                { reviewer: "Sana Malik", email: "sana@example.com", date: "2025-01-06", rating: "5", review: "Great flavor, but the spice level was too high for me." },
+                { reviewer: "Rahul Nair", email: "rahul@example.com", date: "2025-01-08", rating: "3.5", review: "Loved the taste, but could have used more meat." },
+                { reviewer: "Anita Kapoor", email: "anita@example.com", date: "2025-01-10", rating: "5", review: "Great place for biryani lovers." },
+                { reviewer: "Neha Gupta", email: "neha@example.com", date: "2025-01-12", rating: "5", review: "A little crowded but worth the wait for the biryani." }
+            
+
+            ],
+            "Marina Bay":[
+            {
+                    reviewer: "Kavya",
+                    email: "kavya@example.com",
+                    date: "2025-01-15",
+                    rating: "5",
+                    review: "Delicious biryani with authentic flavors."
+                },
+                {
+                    reviewer: "Deepak",
+                    email: "deepak@example.com",
+                    date: "2025-01-16",
+                    rating: "5",
+                    review: "The biryani was aromatic and flavorful."
+                },
+                {
+                    reviewer: "Ananya",
+                    email: "ananya@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Great portion size, but a bit oily."
+                },
+                {
+                    reviewer: "Raj",
+                    email: "raj@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "A classic place for Hyderabadi biryani."
+                },
+                {
+                    reviewer: "Manoj",
+                    email: "manoj@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Service was quick and attentive."
+                }
+
+            ],
+            "Al Huda":[
+            {
+                    reviewer: "Neha",
+                    email: "neha@example.com",
+                    date: "2025-01-10",
+                    rating: "4",
+                    review: "Indian sweets and snacks at their best."
+                },
+                {
+                    reviewer: "Vikram",
+                    email: "vikram@example.com",
+                    date: "2025-01-11",
+                    rating: "4",
+                    review: "The dhokla was soft and tasty."
+                },
+                {
+                    reviewer: "Kiran",
+                    email: "kiran@example.com",
+                    date: "2025-01-12",
+                    rating: "5",
+                    review: "A great place to try Indian snacks."
+                },
+                {
+                    reviewer: "Swati",
+                    email: "swati@example.com",
+                    date: "2025-01-13",
+                    rating: "4",
+                    review: "The service was quick and polite."
+                },
+                {
+                    reviewer: "Siddharth",
+                    email: "siddharth@example.com",
+                    date: "2025-01-14",
+                    rating: "5",
+                    review: "Affordable and great quality."
+                }
+
+            ],
+            "The Royal Chettinad":[
+            {
+                    reviewer: "Kavya",
+                    email: "kavya@example.com",
+                    date: "2025-01-15",
+                    rating: "5",
+                    review: "Delicious biryani with authentic flavors."
+                },
+                {
+                    reviewer: "Deepak",
+                    email: "deepak@example.com",
+                    date: "2025-01-16",
+                    rating: "5",
+                    review: "The biryani was aromatic and flavorful."
+                },
+                {
+                    reviewer: "Ananya",
+                    email: "ananya@example.com",
+                    date: "2025-01-17",
+                    rating: "4",
+                    review: "Great portion size, but a bit oily."
+                },
+                {
+                    reviewer: "Raj",
+                    email: "raj@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "A classic place for Hyderabadi biryani."
+                },
+                {
+                    reviewer: "Manoj",
+                    email: "manoj@example.com",
+                    date: "2025-01-19",
+                    rating: "4",
+                    review: "Service was quick and attentive."
+                }
+
+            ],
+            "Sultan Kitchen":[
+            {
+                    reviewer: "Shivani Patel",
+                    email: "shivani.p@example.com",
+                    date: "2025-01-22",
+                    rating: "4",
+                    review: "Great bakery and breakfast options."
+                },
+                {
+                    reviewer: "Rajiv Malhotra",
+                    email: "rajiv.m@example.com",
+                    date: "2025-01-20",
+                    rating: "4.9",
+                    review: "The french toast was soft and delicious."
+                },
+                {
+                    reviewer: "Sneha Verma",
+                    email: "sneha.v@example.com",
+                    date: "2025-01-18",
+                    rating: "5",
+                    review: "Perfect place for a light breakfast."
+                },
+                {
+                    reviewer: "Vikash Rao",
+                    email: "vikash.r@example.com",
+                    date: "2025-01-16",
+                    rating: "3",
+                    review: "Could improve the coffee, but overall a great experience."
+                },
+                {
+                    reviewer: "Maya Iyer",
+                    email: "maya.i@example.com",
+                    date: "2025-01-14",
+                    rating: "4.9",
+                    review: "Loved the ambiance, very cozy and relaxing."
+                }
+
+            ]
+            
+            
+
+            
+            
+        };
+
+        function getRestaurantReviews() {
+            const params = new URLSearchParams(window.location.search);
+            const restaurantName = params.get('name');
+
+            if (restaurantName && reviews[restaurantName]) {
+                document.getElementById('restaurant-name').textContent = restaurantName;
+                displayReviews(reviews[restaurantName]);
+            } else {
+                document.getElementById('restaurant-name').textContent = "No reviews available.";
+            }
+        }
+
+        
+        function displayReviews() {
+            const restaurantName = "{{ name }}";
+            const reviewsDiv = document.getElementById('reviews');
+            reviewsDiv.innerHTML = '';
+
+            if (restaurantName && reviews[restaurantName]) {
+                reviews[restaurantName].forEach(review => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.classList.add('review');
+                    reviewDiv.innerHTML = `
+                        <p><strong>Reviewer:</strong> ${review.reviewer}</p>
+                        <p><strong>Email:</strong> ${review.email}</p>
+                        <p><strong>Date:</strong> ${review.date}</p>
+                        <p><strong>Rating:</strong> ${review.rating} ⭐</p>
+                        <p><strong>Review:</strong> ${review.review}</p>
+                        <hr>
+                    `;
+                    reviewsDiv.appendChild(reviewDiv);
+                });
+            } else {
+                reviewsDiv.innerHTML = "<p>No reviews available for this restaurant.</p>";
+            }
+        }
+
+        displayReviews();
+
+        // Call the function when the page loads
+        getRestaurantReviews();
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Restaurants</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 48px;
+            font-weight: 700;
+            color: #2c3e50;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #e74c3c, #8e44ad);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .restaurant-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Restaurant Card Styles */
+        .restaurant {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restaurant:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            background-color: #ecf0f1;
+        }
+
+        .restaurant h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #34495e;
+            margin: 15px 0;
+
+        }
+
+        .restaurant p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        /* Button Styles */
+        .add-review {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-review:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Icon and Star Rating Styles */
+        .restaurant::after {
+            content: "⭐";
+            font-size: 20px;
+            color: #f39c12;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1;
+        }
+
+        .restaurant:hover::after {
+            color: #e67e22;
+        }
+
+        .restaurant a {
+            text-decoration: none;
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .restaurant-list {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+        }
+
+        /* Animation for Button */
+        .add-review {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Chennai Restaurants</h1>
+    <div class="restaurant-list">
+        <div class="restaurant">
+            <h3><a href="/custreview/the-spicy-grill">The Spicy Grill</a></h3>
+            <p>Location:📍 T. Nagar</p>
+            <a class="add-review" href="/custreview/the-spicy-grill">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/madras-curry-house">Madras Curry House</a></h3>
+            <p>Location:📍 Mylapore</p>
+            <a class="add-review" href="/custreview/madras-curry-house">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-southern-spice">The Southern Spice</a></h3>
+            <p>Location:📍 Egmore</p>
+            <a class="add-review" href="/custreview/the-southern-spice">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/sangeetha">Sangeetha</a></h3>
+            <p>Location:📍 Anna Nagar</p>
+            <a class="add-review" href="/custreview/sangeetha">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-kitchen">The Kitchen</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/the-kitchen">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/saravana-bhavan">Saravana Bhavan</a></h3>
+            <p>Location:📍 T. Nagar</p>
+            <a class="add-review" href="/custreview/saravana-bhavan">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/bombay-brasserie">Bombay Brasserie</a></h3>
+            <p>Location:📍 Alwarpet</p>
+            <a class="add-review" href="/custreview/bombay-brasserie">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/salt">Salt</a></h3>
+            <p>Location:📍 Gopalapuram</p>
+            <a class="add-review" href="/custreview/salt">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/anjappar-chettinad">Anjappar Chettinad Restaurant</a></h3>
+            <p>Location:📍 Chetpet</p>
+            <a class="add-review" href="/custreview/anjappar-chettinad">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/rasa">Rasa</a></h3>
+            <p>Location:📍 Mylapore</p>
+            <a class="add-review" href="/custreview/rasa">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/kebab-factory">Kebab Factory</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/kebab-factory">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/pind-punjabi">Pind Punjabi</a></h3>
+            <p>Location:📍 Adyar</p>
+            <a class="add-review" href="/custreview/pind-punjabi">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/biryani-king">Biryani King</a></h3>
+            <p>Location:📍 Mount Road</p>
+            <a class="add-review" href="/custreview/biryani-king">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-taj-coromandel">The Taj Coromandel</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/the-taj-coromandel">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/junior-kuppanna">Junior Kuppanna</a></h3>
+            <p>Location:📍 Alwarthirunagar</p>
+            <a class="add-review" href="/custreview/junior-kuppanna">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/tryst">Tryst</a></h3>
+            <p>Location:📍 MRC Nagar</p>
+            <a class="add-review" href="/custreview/#tryst">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/sukhraaj">Sukhraaj</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/sukhraaj">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-marina">The Marina</a></h3>
+            <p>Location:📍 Elliot's Beach</p>
+            <a class="add-review" href="/custreview/the-marina">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/chettinad-plaza">Chettinad Plaza</a></h3>
+            <p>Location:📍 Velachery</p>
+            <a class="add-review" href="/custreview/chettinad-plaza">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/mosaic">Mosaic</a></h3>
+            <p>Location:📍 Mylapore</p>
+            <a class="add-review" href="/custreview/mosaic">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/barbeque-nation">Barbeque Nation</a></h3>
+            <p>Location:📍 Velachery</p>
+            <a class="add-review" href="/custreview/barbeque-nation">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-courtyard">The Courtyard</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/the-courtyard">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/murugan-idli-shop">Murugan Idli Shop</a></h3>
+            <p>Location:📍 T. Nagar</p>
+            <a class="add-review" href="/custreview/murugan-idli-shop">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/olive-beach">Olive Beach</a></h3>
+            <p>Location:📍 Alwarpet</p>
+            <a class="add-review" href="/custreview/olive-beach">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-royal-india">The Royal India</a></h3>
+            <p>Location:📍 Mount Road</p>
+            <a class="add-review" href="/custreview/the-royal-india">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/ss-hyderabad">SS Hyderabad</a></h3>
+            <p>Location:📍 Adyar</p>
+            <a class="add-review" href="/custreview/ss-hyderabad">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/bay-view">Bay View</a></h3>
+            <p>Location:📍 Marina Beach</p>
+            <a class="add-review" href="/custreview/bay-view">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-french-loaf">The French Loaf</a></h3>
+            <p>Location:📍 OMR</p>
+            <a class="add-review" href="/custreview/the-french-loaf">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-green-bean">The Green Bean</a></h3>
+            <p>Location:📍 Taramani</p>
+            <a class="add-review" href="/custreview/the-green-bean">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/chennai-spices">Chennai Spices</a></h3>
+            <p>Location:📍 Kotturpuram</p>
+            <a class="add-review" href="/custreview/chennai-spices">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/chennai-darbar">Chennai Darbar</a></h3>
+            <p>Location:📍 T. Nagar</p>
+            <a class="add-review" href="/custreview/chennai-darbar">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/shree-rajbhog">Shree Rajbhog</a></h3>
+            <p>Location:📍 Velachery</p>
+            <a class="add-review" href="/custreview/shree-rajbhog">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/marina-bay">Marina Bay</a></h3>
+            <p>Location:📍 Elliot's Beach</p>
+            <a class="add-review" href="/custreview/marina-bay">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/al-huda">Al Huda</a></h3>
+            <p>Location:📍 Nungambakkam</p>
+            <a class="add-review" href="/custreview/al-huda">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/the-royal-chettinad">The Royal Chettinad</a></h3>
+            <p>Location:📍 Chetpet</p>
+            <a class="add-review" href="/custreview/the-royal-chettinad">+ Add Review</a>
+        </div>
+        <div class="restaurant">
+            <h3><a href="/custreview/sultan-kitchen">Sultan Kitchen</a></h3>
+            <p>Location:📍 Adyar</p>
+            <a class="add-review" href="/custreview/sultan-kitchen">+ Add Review</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
